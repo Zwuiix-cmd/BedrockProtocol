@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace pocketmine\network\mcpe\protocol;
 
 use pocketmine\network\mcpe\protocol\serializer\PacketSerializer;
-use Ramsey\Uuid\Uuid;
 
 class EmotePacket extends DataPacket implements ClientboundPacket, ServerboundPacket{
 	public const NETWORK_ID = ProtocolInfo::EMOTE_PACKET;
@@ -61,10 +60,6 @@ class EmotePacket extends DataPacket implements ClientboundPacket, ServerboundPa
 	protected function decodePayload(PacketSerializer $in) : void{
 		$this->actorRuntimeId = $in->getActorRuntimeId();
 		$this->emoteId = $in->getString();
-		if(!Uuid::isValid($this->emoteId)) {
-			throw new PacketDecodeException("Invalid EmoteId");
-		}
-
 		$this->xboxUserId = $in->getString();
 		$this->platformChatId = $in->getString();
 		$this->flags = $in->getByte();

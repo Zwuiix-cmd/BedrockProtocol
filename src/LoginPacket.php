@@ -72,10 +72,6 @@ class LoginPacket extends DataPacket implements ServerboundPacket{
 		if(!is_array($chainDataJson["chain"])){
 			throw new PacketDecodeException("Chain data 'chain' element must be a list of strings");
 		}
-		if(count($chainDataJson["chain"]) !== 3) {
-			throw new PacketDecodeException("Chain data 'chain' must contain three jwt");
-		}
-
 		$jwts = [];
 		foreach($chainDataJson["chain"] as $jwt){
 			if(!is_string($jwt)){
